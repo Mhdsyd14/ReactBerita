@@ -25,7 +25,7 @@ export default class Search extends Component {
   searchDatas = () => {
     axios
       .get(
-        "https://newsapi.org/v2/everything?domains=wsj.com&apiKey=171443a1da2145fb9262ab18a9af71b5"
+        "https://newsapi.org/v2/everything?q=apple&from=2024-05-10&to=2024-05-10&sortBy=popularity&apiKey=171443a1da2145fb9262ab18a9af71b5"
       )
       .then((response) => {
         this.setState({
@@ -79,7 +79,11 @@ export default class Search extends Component {
     }
 
     if (error) {
-      return <div>Error: {error.message}</div>;
+      return (
+        <div class="alert alert-danger" role="alert">
+          Error: {error.message}
+        </div>
+      );
     }
     return (
       <>
