@@ -56,25 +56,52 @@ export default class Search extends Component {
   };
 
   componentDidMount() {
+    // console.log(this.cari);
     this.searchDatas();
   }
 
   render() {
-    const { searchData, isLoading, error } = this.state;
+    const { cari, searchData, isLoading, error } = this.state;
 
     if (isLoading) {
       return (
-        <div className="container d-flex justify-content-center">
-          <ColorRing
-            visible={true}
-            height="80"
-            width="80"
-            ariaLabel="color-ring-loading"
-            wrapperStyle={{}}
-            wrapperClass="color-ring-wrapper"
-            colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
-          />
-        </div>
+        <>
+          <div className="input-group mb-3 mt-3 container">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search berita"
+              id="searchInput"
+              value={cari}
+              onChange={(e) => this.handleOnchange(e)}
+            />
+            <button
+              className="input-group-text"
+              id="basic-addon2"
+              onClick={() => {
+                this.setState({
+                  isLoading: true,
+                });
+                setTimeout(() => {
+                  this.searchDatas(); // Panggil searchDatas di sini setelah 3 detik
+                }, 3000);
+              }}
+            >
+              Search
+            </button>
+          </div>
+          <div className="container d-flex justify-content-center">
+            <ColorRing
+              visible={true}
+              height="80"
+              width="80"
+              ariaLabel="color-ring-loading"
+              wrapperStyle={{}}
+              wrapperClass="color-ring-wrapper"
+              colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+            />
+          </div>
+        </>
       );
     }
 
@@ -85,6 +112,7 @@ export default class Search extends Component {
         </div>
       );
     }
+
     return (
       <>
         <div className="input-group mb-3 mt-3 container">
@@ -93,6 +121,7 @@ export default class Search extends Component {
             className="form-control"
             placeholder="Search berita"
             id="searchInput"
+            value={cari}
             onChange={(e) => this.handleOnchange(e)}
           />
           <button
